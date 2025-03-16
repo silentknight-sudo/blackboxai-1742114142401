@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - PlayStreak</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <span class="text-2xl font-bold text-blue-500">Play</span>
+                        <span class="text-2xl font-bold text-white">Streak</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links - Desktop -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/casino.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Casino</a>
+                        <a href="/sports.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sports</a>
+                        <a href="/wallet.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Wallet</a>
+                    </div>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <!-- Balance -->
+                        <div class="mr-4">
+                            <span class="text-gray-400 text-sm">Balance:</span>
+                            <span class="ml-1 text-green-500 font-medium" id="headerBalance">$1,000.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Profile Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="bg-gray-800 rounded-lg p-6 shadow-lg">
+                    <!-- Profile Picture -->
+                    <div class="text-center mb-6">
+                        <div class="relative inline-block">
+                            <img id="profilePicture" class="w-32 h-32 rounded-full mx-auto" src="https://ui-avatars.com/api/?name=User&background=random" alt="Profile Picture">
+                            <label for="uploadPicture" class="absolute bottom-0 right-0 bg-blue-500 rounded-full p-2 cursor-pointer hover:bg-blue-600 transition-colors">
+                                <i class="fas fa-camera"></i>
+                                <input type="file" id="uploadPicture" class="hidden" accept="image/*">
+                            </label>
+                        </div>
+                        <h2 id="profileName" class="text-xl font-bold mt-4">John Doe</h2>
+                        <p id="profileEmail" class="text-gray-400">john@example.com</p>
+                    </div>
+
+                    <!-- Navigation Tabs -->
+                    <nav class="space-y-2">
+                        <button class="tab-btn w-full flex items-center px-4 py-2 bg-blue-500 rounded-md" data-tab="account">
+                            <i class="fas fa-user mr-3"></i>
+                            Account Settings
+                        </button>
+                        <button class="tab-btn w-full flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md" data-tab="security">
+                            <i class="fas fa-shield-alt mr-3"></i>
+                            Security
+                        </button>
+                        <button class="tab-btn w-full flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md" data-tab="history">
+                            <i class="fas fa-history mr-3"></i>
+                            Betting History
+                        </button>
+                        <button class="tab-btn w-full flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md" data-tab="preferences">
+                            <i class="fas fa-cog mr-3"></i>
+                            Preferences
+                        </button>
+                    </nav>
+
+                    <!-- Logout Button -->
+                    <button onclick="window.auth.logout()" class="w-full mt-6 flex items-center justify-center px-4 py-2 bg-red-500 hover:bg-red-600 rounded-md transition-colors">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Account Settings Tab -->
+                <div id="accountTab" class="tab-content active bg-gray-800 rounded-lg p-6 shadow-lg">
+                    <h2 class="text-xl font-semibold mb-6">Account Settings</h2>
+                    
+                    <form id="accountForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">First Name</label>
+                                <input type="text" id="firstName" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Last Name</label>
+                                <input type="text" id="lastName" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Phone Number</label>
+                            <input type="tel" id="phone" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <button type="submit" class="w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-md font-medium transition-colors">
+                            Save Changes
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Security Tab -->
+                <div id="securityTab" class="tab-content bg-gray-800 rounded-lg p-6 shadow-lg">
+                    <h2 class="text-xl font-semibold mb-6">Security Settings</h2>
+                    
+                    <form id="securityForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Current Password</label>
+                            <input type="password" id="currentPassword" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">New Password</label>
+                            <input type="password" id="newPassword" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="enable2FA" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-700 rounded bg-gray-900">
+                                <label for="enable2FA" class="ml-2 block text-sm text-gray-400">
+                                    Enable Two-Factor Authentication
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-md font-medium transition-colors">
+                            Update Security Settings
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Betting History Tab -->
+                <div id="historyTab" class="tab-content bg-gray-800 rounded-lg p-6 shadow-lg">
+                    <h2 class="text-xl font-semibold mb-6">Betting History</h2>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="text-left text-gray-400">
+                                    <th class="py-3 px-4">Date</th>
+                                    <th class="py-3 px-4">Game</th>
+                                    <th class="py-3 px-4">Bet Amount</th>
+                                    <th class="py-3 px-4">Result</th>
+                                    <th class="py-3 px-4">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bettingHistory">
+                                <!-- Betting history will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Preferences Tab -->
+                <div id="preferencesTab" class="tab-content bg-gray-800 rounded-lg p-6 shadow-lg">
+                    <h2 class="text-xl font-semibold mb-6">Preferences</h2>
+                    
+                    <form id="preferencesForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-4">Notifications</label>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="emailNotifications" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-700 rounded bg-gray-900">
+                                    <label for="emailNotifications" class="ml-2 block text-sm text-gray-400">
+                                        Email Notifications
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="pushNotifications" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-700 rounded bg-gray-900">
+                                    <label for="pushNotifications" class="ml-2 block text-sm text-gray-400">
+                                        Push Notifications
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="smsNotifications" class="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-700 rounded bg-gray-900">
+                                    <label for="smsNotifications" class="ml-2 block text-sm text-gray-400">
+                                        SMS Notifications
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Time Zone</label>
+                            <select id="timezone" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="UTC">UTC</option>
+                                <option value="EST">Eastern Time</option>
+                                <option value="CST">Central Time</option>
+                                <option value="PST">Pacific Time</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Currency</label>
+                            <select id="currency" class="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="BTC">BTC</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-md font-medium transition-colors">
+                            Save Preferences
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>
