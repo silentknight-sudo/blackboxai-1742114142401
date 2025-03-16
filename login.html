@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PlayStreak</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>body { font-family: 'Poppins', sans-serif; }</style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full mx-4">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <h1 class="inline-flex items-center text-4xl font-bold">
+                <span class="text-blue-500">Play</span>
+                <span class="text-white">Streak</span>
+            </h1>
+            <h2 class="mt-6 text-3xl font-bold">Welcome back</h2>
+            <p class="mt-2 text-sm text-gray-400">
+                Don't have an account?
+                <a href="/signup.html" class="text-blue-500 hover:text-blue-400">Sign up</a>
+            </p>
+        </div>
+
+        <!-- Login Form -->
+        <div class="bg-gray-800 p-8 rounded-xl shadow-lg">
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="space-y-6">
+                    <!-- Email -->
+                    <div>
+                        <label for="email" class="block text-sm text-gray-400">Email address</label>
+                        <input type="email" id="email" name="email" required
+                            class="mt-1 w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md text-white"
+                            placeholder="Enter your email">
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <label for="password" class="block text-sm text-gray-400">Password</label>
+                        <div class="relative">
+                            <input type="password" id="password" name="password" required
+                                class="mt-1 w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-md text-white"
+                                placeholder="Enter your password">
+                            <button type="button" onclick="togglePassword()"
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" name="remember"
+                                class="h-4 w-4 text-blue-500 border-gray-700 rounded bg-gray-900">
+                            <label for="remember" class="ml-2 text-sm text-gray-400">Remember me</label>
+                        </div>
+                        <a href="#" class="text-sm text-blue-500 hover:text-blue-400">Forgot password?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn"
+                        class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-md text-white font-medium">
+                        <i class="fas fa-lock mr-2"></i>Sign in
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Test Credentials -->
+        <div class="mt-4 text-center text-sm text-gray-400">
+            <p>Test credentials:</p>
+            <p>Email: test@example.com</p>
+            <p>Password: password123</p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.querySelector('.fa-eye');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.add('fa-eye-slash');
+                eyeIcon.classList.remove('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.add('fa-eye');
+                eyeIcon.classList.remove('fa-eye-slash');
+            }
+        }
+
+        // Handle login form submission
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Update button state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing in...';
+
+            // Check credentials
+            if (email === 'test@example.com' && password === 'password123') {
+                // Store auth data
+                localStorage.setItem('auth_token', 'fake_jwt_token_' + Date.now());
+                localStorage.setItem('user_data', JSON.stringify({
+                    id: 1,
+                    email: email,
+                    name: 'Test User'
+                }));
+
+                // Handle remember me
+                if (remember) {
+                    localStorage.setItem('remember_me', 'true');
+                    localStorage.setItem('remembered_email', email);
+                }
+
+                // Show success message
+                alert('Login successful! Redirecting...');
+
+                // Redirect to home
+                window.location.href = '/';
+                return false;
+            }
+
+            // Show error for invalid credentials
+            alert('Invalid credentials. Use test@example.com / password123');
+            
+            // Reset button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-lock mr-2"></i>Sign in';
+            return false;
+        }
+
+        // Check for remembered user
+        window.onload = function() {
+            if (localStorage.getItem('remember_me') === 'true') {
+                const rememberedEmail = localStorage.getItem('remembered_email');
+                if (rememberedEmail) {
+                    document.getElementById('email').value = rememberedEmail;
+                    document.getElementById('remember').checked = true;
+                }
+            }
+        };
+    </script>
+</body>
+</html>
