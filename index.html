@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayStreak - Online Casino & Sports Betting Platform</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <span class="text-2xl font-bold text-blue-500">Play</span>
+                        <span class="text-2xl font-bold text-white">Streak</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links - Desktop -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/casino.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Casino</a>
+                        <a href="/sports.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sports</a>
+                        <a href="/wallet.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Wallet</a>
+                    </div>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <a href="/login.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                        <a href="/signup.html" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-sm font-medium">Sign Up</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="/casino.html" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Casino</a>
+                <a href="/sports.html" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Sports</a>
+                <a href="/wallet.html" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Wallet</a>
+                <a href="/login.html" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
+                <a href="/signup.html" class="bg-blue-500 hover:bg-blue-600 block px-3 py-2 rounded-md text-base font-medium">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div class="text-center">
+                <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                    <span class="block">Welcome to </span>
+                    <span class="block text-blue-500">PlayStreak</span>
+                </h1>
+                <p class="mt-3 max-w-md mx-auto text-base text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+                    Experience the thrill of online casino games and sports betting. Play responsibly and win big!
+                </p>
+                <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+                    <div class="rounded-md shadow">
+                        <a href="/signup.html" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 md:py-4 md:text-lg md:px-10">
+                            Get Started
+                        </a>
+                    </div>
+                    <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                        <a href="/casino.html" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-500 bg-gray-800 hover:bg-gray-700 md:py-4 md:text-lg md:px-10">
+                            View Games
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="bg-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <!-- Casino Games -->
+                <div class="bg-gray-900 p-6 rounded-lg">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-dice fa-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Casino Games</h3>
+                    <p class="text-gray-400">Experience our wide selection of casino games including slots, poker, and more.</p>
+                </div>
+                
+                <!-- Sports Betting -->
+                <div class="bg-gray-900 p-6 rounded-lg">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-football-ball fa-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Sports Betting</h3>
+                    <p class="text-gray-400">Bet on your favorite sports with competitive odds and live betting options.</p>
+                </div>
+                
+                <!-- Secure Payments -->
+                <div class="bg-gray-900 p-6 rounded-lg">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-shield-alt fa-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Secure Payments</h3>
+                    <p class="text-gray-400">Fast and secure payment methods for deposits and withdrawals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Responsible Gaming</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Games</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Casino</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Sports</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Live Betting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter fa-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook fa-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8">
+                <p class="text-gray-400 text-sm text-center">&copy; 2024 PlayStreak. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
