@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet - PlayStreak</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .payment-method {
+            transition: all 0.2s ease-in-out;
+        }
+        .payment-method:hover {
+            transform: translateY(-2px);
+        }
+        .transaction-row {
+            transition: background-color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <span class="text-2xl font-bold text-blue-500">Play</span>
+                        <span class="text-2xl font-bold text-white">Streak</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links - Desktop -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/casino.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Casino</a>
+                        <a href="/sports.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sports</a>
+                        <a href="/wallet.html" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Wallet</a>
+                    </div>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <!-- Balance -->
+                        <div class="mr-4">
+                            <span class="text-gray-400 text-sm">Balance:</span>
+                            <span class="ml-1 text-green-500 font-medium" id="headerBalance">$1,000.00</span>
+                        </div>
+                        
+                        <!-- Profile dropdown -->
+                        <div class="relative">
+                            <button type="button" class="profile-button bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=User&background=random" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Balance Card -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-lg font-medium mb-1">Available Balance</h2>
+                    <div class="text-3xl font-bold" id="mainBalance">$1,000.00</div>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm mb-1">Account ID</div>
+                    <div class="font-medium" id="accountId">#123456</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Deposit Section -->
+            <div class="lg:col-span-2">
+                <div class="bg-gray-800 rounded-lg p-6 mb-8">
+                    <h2 class="text-xl font-semibold mb-6">Deposit</h2>
+                    
+                    <!-- Amount Presets -->
+                    <div class="grid grid-cols-4 gap-4 mb-6">
+                        <button class="amount-preset bg-gray-700 hover:bg-blue-500 py-2 rounded-md text-center transition-colors">$10</button>
+                        <button class="amount-preset bg-gray-700 hover:bg-blue-500 py-2 rounded-md text-center transition-colors">$25</button>
+                        <button class="amount-preset bg-gray-700 hover:bg-blue-500 py-2 rounded-md text-center transition-colors">$50</button>
+                        <button class="amount-preset bg-gray-700 hover:bg-blue-500 py-2 rounded-md text-center transition-colors">$100</button>
+                    </div>
+
+                    <!-- Custom Amount -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Custom Amount</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">$</span>
+                            <input type="number" id="depositAmount" min="10" step="1" 
+                                class="block w-full pl-8 pr-12 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter amount">
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Payment Method</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <button class="payment-method bg-gray-700 p-4 rounded-lg text-center hover:bg-gray-600 transition-colors">
+                                <i class="fab fa-cc-visa text-2xl mb-2"></i>
+                                <div class="text-sm">Visa</div>
+                            </button>
+                            <button class="payment-method bg-gray-700 p-4 rounded-lg text-center hover:bg-gray-600 transition-colors">
+                                <i class="fab fa-cc-mastercard text-2xl mb-2"></i>
+                                <div class="text-sm">Mastercard</div>
+                            </button>
+                            <button class="payment-method bg-gray-700 p-4 rounded-lg text-center hover:bg-gray-600 transition-colors">
+                                <i class="fab fa-bitcoin text-2xl mb-2"></i>
+                                <div class="text-sm">Bitcoin</div>
+                            </button>
+                            <button class="payment-method bg-gray-700 p-4 rounded-lg text-center hover:bg-gray-600 transition-colors">
+                                <i class="fab fa-paypal text-2xl mb-2"></i>
+                                <div class="text-sm">PayPal</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button id="depositBtn" 
+                        class="w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-md font-medium transition-colors">
+                        Deposit Now
+                    </button>
+                </div>
+
+                <!-- Withdrawal Section -->
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h2 class="text-xl font-semibold mb-6">Withdraw</h2>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Withdrawal Amount</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">$</span>
+                            <input type="number" id="withdrawAmount" min="10" step="1" 
+                                class="block w-full pl-8 pr-12 py-2 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter amount">
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Withdrawal Method</label>
+                        <select id="withdrawMethod" 
+                            class="block w-full py-2 px-3 bg-gray-900 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="bank">Bank Transfer</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="bitcoin">Bitcoin</option>
+                        </select>
+                    </div>
+
+                    <button id="withdrawBtn" 
+                        class="w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-md font-medium transition-colors">
+                        Withdraw
+                    </button>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="bg-gray-800 rounded-lg p-6">
+                <h2 class="text-xl font-semibold mb-6">Transaction History</h2>
+                
+                <div class="space-y-4" id="transactionHistory">
+                    <!-- Transactions will be inserted here -->
+                    <div class="text-center text-gray-400 py-8">
+                        <i class="fas fa-history text-3xl mb-2"></i>
+                        <p>Loading transactions...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/wallet.js"></script>
+</body>
+</html>
