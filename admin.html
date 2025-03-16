@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - PlayStreak</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .stat-card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 bg-gray-800">
+                <!-- Logo -->
+                <div class="flex items-center h-16 px-4 bg-gray-900">
+                    <a href="/" class="flex items-center">
+                        <span class="text-2xl font-bold text-blue-500">Play</span>
+                        <span class="text-2xl font-bold text-white">Streak</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <div class="flex flex-col flex-1 overflow-y-auto">
+                    <nav class="flex-1 px-2 py-4 space-y-2">
+                        <a href="#" class="flex items-center px-4 py-2 bg-blue-500 rounded-md">
+                            <i class="fas fa-chart-line mr-3"></i>
+                            Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-users mr-3"></i>
+                            Users
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-gamepad mr-3"></i>
+                            Games
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-ticket-alt mr-3"></i>
+                            Bets
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-wallet mr-3"></i>
+                            Transactions
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 rounded-md">
+                            <i class="fas fa-cog mr-3"></i>
+                            Settings
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Top Navigation -->
+            <div class="bg-gray-800 border-b border-gray-700">
+                <div class="flex items-center justify-between h-16 px-4">
+                    <!-- Mobile menu button -->
+                    <button type="button" class="md:hidden text-gray-400 hover:text-white">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <!-- Search -->
+                    <div class="flex-1 px-4 ml-4">
+                        <div class="max-w-md">
+                            <div class="relative">
+                                <input type="text" class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:border-blue-500" placeholder="Search...">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                                    <i class="fas fa-search text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Menu -->
+                    <div class="flex items-center">
+                        <button type="button" class="flex items-center text-sm rounded-full focus:outline-none">
+                            <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=Admin&background=random" alt="">
+                            <span class="ml-2 text-white">Admin</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 overflow-auto bg-gray-900 p-6">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <!-- Total Users -->
+                        <div class="stat-card bg-gradient-to-br from-blue-600 to-blue-400 rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-blue-100">Total Users</p>
+                                    <h3 class="text-2xl font-bold" id="totalUsers">0</h3>
+                                </div>
+                                <div class="text-blue-100">
+                                    <i class="fas fa-users fa-2x"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-blue-100 mt-2">
+                                <i class="fas fa-arrow-up"></i>
+                                <span id="userGrowth">0%</span> from last month
+                            </p>
+                        </div>
+
+                        <!-- Total Bets -->
+                        <div class="stat-card bg-gradient-to-br from-green-600 to-green-400 rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-green-100">Total Bets</p>
+                                    <h3 class="text-2xl font-bold" id="totalBets">0</h3>
+                                </div>
+                                <div class="text-green-100">
+                                    <i class="fas fa-ticket-alt fa-2x"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-green-100 mt-2">
+                                <i class="fas fa-arrow-up"></i>
+                                <span id="betGrowth">0%</span> from yesterday
+                            </p>
+                        </div>
+
+                        <!-- Revenue -->
+                        <div class="stat-card bg-gradient-to-br from-purple-600 to-purple-400 rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-purple-100">Revenue</p>
+                                    <h3 class="text-2xl font-bold" id="totalRevenue">$0</h3>
+                                </div>
+                                <div class="text-purple-100">
+                                    <i class="fas fa-dollar-sign fa-2x"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-purple-100 mt-2">
+                                <i class="fas fa-arrow-up"></i>
+                                <span id="revenueGrowth">0%</span> from last week
+                            </p>
+                        </div>
+
+                        <!-- Active Games -->
+                        <div class="stat-card bg-gradient-to-br from-red-600 to-red-400 rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-red-100">Active Games</p>
+                                    <h3 class="text-2xl font-bold" id="activeGames">0</h3>
+                                </div>
+                                <div class="text-red-100">
+                                    <i class="fas fa-gamepad fa-2x"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-red-100 mt-2">
+                                <span id="activeUsers">0</span> users playing now
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                        <!-- Revenue Chart -->
+                        <div class="bg-gray-800 rounded-lg p-6 shadow-lg">
+                            <h3 class="text-lg font-semibold mb-4">Revenue Overview</h3>
+                            <canvas id="revenueChart" height="300"></canvas>
+                        </div>
+
+                        <!-- User Activity Chart -->
+                        <div class="bg-gray-800 rounded-lg p-6 shadow-lg">
+                            <h3 class="text-lg font-semibold mb-4">User Activity</h3>
+                            <canvas id="userActivityChart" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-gray-800 rounded-lg p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">Recent Activity</h3>
+                            <button class="text-sm text-blue-500 hover:text-blue-400">View All</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="text-left text-gray-400">
+                                        <th class="py-3 px-4">User</th>
+                                        <th class="py-3 px-4">Action</th>
+                                        <th class="py-3 px-4">Amount</th>
+                                        <th class="py-3 px-4">Time</th>
+                                        <th class="py-3 px-4">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentActivity">
+                                    <!-- Activity rows will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
